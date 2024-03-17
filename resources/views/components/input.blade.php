@@ -1,0 +1,1 @@
+<input placeholder="{{$place_holder}}" class="input input-bordered w-full " type="{{ $type ?? 'text' }}" name="{{ $name }}" id="{{ $name }}"  required>
