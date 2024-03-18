@@ -7,7 +7,7 @@
         @if (session()->has('error'))
             @include('components.error-message', ['message' => session('error')])
         @else
-            <div class="grid grid-cols-2 lg:grid-cols-3 gap-8 items-center px-8">
+            <div class="grid grid-cols-2 lg:grid-cols-3 gap-8 items-center px-8 pb-16">
                 @foreach ($allProduct as $index => $product)
                     @include('components.product-card', [
                         'product' => $product,

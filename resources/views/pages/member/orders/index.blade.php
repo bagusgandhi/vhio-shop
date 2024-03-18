@@ -2,7 +2,7 @@
 
 @section('title', 'All Your Order History')
 @section('content')
-    <div class="container mx-auto">
+    <div class="container mx-auto pb-16">
         @include('components.header')
         @if (session()->has('error'))
             @include('components.error-message', ['message' => session('error')])
@@ -22,10 +22,6 @@
                             <th
                                 class="hidden md:table-cell px-6 py-3 text-center text-xs font-medium text-gray-500 uppercase tracking-wider">
                                 <p class="font-bold text-sm">Total</p>
-                            </th>
-                            <th
-                                class="hidden md:table-cell px-6 py-3 text-center text-xs font-medium text-gray-500 uppercase tracking-wider">
-                                <p class="font-bold text-sm">Order Status</p>
                             </th>
                             <th
                                 class="hidden md:table-cell px-6 py-3 text-center text-xs font-medium text-gray-500 uppercase tracking-wider">
@@ -55,13 +51,10 @@
                                     <p>{{ \App\Helpers\CurrencyFormat::data($item['total']) }}</p>
                                 </td>
                                 <td class="hidden md:table-cell px-6 py-4 whitespace-nowrap text-center">
-                                    <span class="col-span-2 hover:text-primary">{{ $item['status_order'] }}</span>
-                                </td>
-                                <td class="hidden md:table-cell px-6 py-4 whitespace-nowrap text-center">
                                     <span class="col-span-2 hover:text-primary">{{ $item['status_payment'] }}</span>
                                 </td>
                                 <td class="hidden md:table-cell px-6 py-4 whitespace-nowrap text-center">
-                                    <span class="col-span-2 hover:text-primary">{{ $item['updated_at'] }}</span>
+                                    <span class="col-span-2 hover:text-primary">{{ $item['created_at'] }}</span>
                                 </td>
                             </tr>
                         @endforeach
