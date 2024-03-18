@@ -7,7 +7,7 @@
         @if (session()->has('error'))
             @include('components.error-message', ['message' => session('error')])
         @else
-            <div>
+            <div class="pb-16">
                 <div class="flex flex-row items-center justify-between mx-auto p-6">
                     <div class="w-1/2">
                         <h3 class="font-bold text-2xl">Invoice</h3>
@@ -24,9 +24,14 @@
                             @endif
                         </span>
                         @if ($oneOrder->payment->expiry_time > now() && $oneOrder->payment->transaction_status === 'pending')
-                            <a href="{{ url('payments/' . $oneOrder->payment->transaction_id ) }}"><button class="w-full btn btn-sm bg-gray-800 text-white">Pay Now</button></a>
+                            <a href="{{ url('payments/' . $oneOrder->payment->transaction_id) }}"><button
+                                    class="w-full btn btn-sm bg-gray-800 text-white">Pay Now</button></a>
                         @else
-                            <p class="font-bold">This payment has expired.</p>
+                            @if ($oneOrder->payment->transaction_status == 'settlement' || $oneOrder->payment->transaction_status == 'capture')
+                                <p class="font-bold text-center">Payment success!.</p>
+                            @else
+                                <p class="font-bold">This payment has expired.</p>
+                            @endif
                         @endif
                     </div>
                 </div>
@@ -98,22 +103,22 @@
                     </table>
 
                     @if ($oneOrder->status_payment === 'paid')
-                        <div class="p-6">
+                        <div class="p-6 bg-success text-white">
                             <h4 class="font-bold px-2 text-green">Detail Payment</h4>
-                            {{-- <table class="min-w-full divide-y divide-gray-200 table">
+                            <table class="min-w-full divide-y divide-gray-200 table">
                                 <tbody>
                                     <tr>
                                         <td>
-                                            <p class="font-bold">{{ $invoices->payment->va_number }}</p>
-                                            <p>at {{ $latest_payment->created_at }}</p>
+                                            <p class="font-bold">{{ $oneOrder->payment->va_number }}</p>
+                                            <p>at {{ $oneOrder->payment->updated_at }}</p>
                                         </td>
                                         <td>
-                                            <p class="text-center font-bold">Bank
-                                                {{ strtoupper($invoices->payment->bank) }}</p>
+                                            <p class="text-right font-bold">Bank
+                                                {{ strtoupper($oneOrder->payment->bank) }}</p>
                                         </td>
                                     </tr>
                                 </tbody>
-                            </table> --}}
+                            </table>
                         </div>
                     @endif
                 </div>
