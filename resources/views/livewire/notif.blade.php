@@ -4,10 +4,13 @@
             // console.log(event);
             Toastify({
                 text: event.detail[0],
-                className: `px-5 py-4 text-xs text-white font-bold fixed mt-16 rounded-lg mx-4  bg-${event.detail[1]} z-50`,
-                position: "right",
+                className: 'font-bold mt-16 rounded-lg z-50',
+                position: "center",
                 stopOnFocus: true,
-                duration: 3000
+                duration: 3000,
+                style: {
+                    background: event.detail[1] == "success" ? "green" : "red",
+                },
             }).showToast();
         })
     </script>
