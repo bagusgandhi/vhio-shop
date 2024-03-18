@@ -4,7 +4,7 @@
         <div class="px-8">
 
             @if (count($cartItems) === 0)
-                <div class="text-center bg-grey-secondary-50 rounded-md p-10">
+                <div class="text-center bg-grey-secondary-50 rounded-md p-10 h-screen">
                     <h3 class="font-bold text-xl">Your Cart is Empty</h3>
                     <p>Your shopping cart is currently empty. It's time to start shopping!</p>
                     <a href="{{ url('products') }}" class="flex justify-center py-2">
