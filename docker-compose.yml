@@ -1,13 +1,42 @@
 version: '3'
 
 services:
-  app:
+  vhioshop_app:
+    container_name: vhioshop_app
     build:
       context: .
       dockerfile: Dockerfile
     ports:
       - "8089:80"
+    restart: unless-stopped
     volumes:
       - .:/var/www/html
     env_file:
       - ./your-path-env-file
+    networks:
+      - vhioshop
+
+  vhioshop_db:
+    container_name: vhioshop_db
+    image: mysql:5.7
+    restart: unless-stopped
+    environment:
+      MYSQL_DATABASE: ${DB_DATABASE}
+      MYSQL_ROOT_PASSWORD: ${DB_PASSWORD}
+      MYSQL_PASSWORD: ${DB_PASSWORD}
+      MYSQL_USER: ${DB_USERNAME}
+      SERVICE_TAGS: dev
+      SERVICE_NAME: mysql
+    volumes:
+      - dbdata:/var/lib/mysql/
+    networks:
+      - vhioshop
+
+
+networks:
+  vhioshop:
+    driver: bridge
+
+volumes:
+  dbdata:
+    driver: local
