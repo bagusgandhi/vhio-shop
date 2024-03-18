@@ -1,5 +1,5 @@
 <div>
-    <div class="flex items-center justify-between py-4 mb-16">
+    <div class="flex items-center justify-between py-4 border-b-2 border-primary mb-16">
         <div class="flex gap-10 items-center">
             <a href="{{ url('/products') }}">
                 <h1 class="text-2xl font-bold text-center text-purple-900">Vhio Shop</h1>
